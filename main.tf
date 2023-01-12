@@ -13,14 +13,14 @@ resource "scaleway_vpc_private_network" "private_network" {
 }
 
 resource "scaleway_instance_ip" "public_ip" {
-  count = 3
+  count = 4
 }
 
 resource "scaleway_instance_server" "server" {
   for_each = scaleway_instance_ip.public_ip
 
-  name = "${var.worker.name}-${index(scaleway_instance_ip.public_ip, each.value) + 1}"
-  type = var.worker.type
-  image = var.worker.image
+  name = "${var.configuration.name}-${index(scaleway_instance_ip.public_ip, each.value) + 1}"
+  type = var.configuration.type
+  image = "${index(scaleway_instance_ip.public_ip, each.value) + 1}" <= var.configuration.no_of_master ? var.configuration.type_of_master : var.configuration.type_of_worker
   ip_id = each.value.ip_id
 }

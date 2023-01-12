@@ -1,13 +1,9 @@
 prefix = "mai"
 
-master = {
+configuration = {
+    no_of_master = 1
     name = "mayas"
-    type = "DEV1-XL"
-    image = "ubuntu_focal"
-}
-
-worker = {
-    name = "mayas"
-    type = "DEV1-S"
+    type_of_master = "DEV1-XL"
+    type_of_worker = "DEV1-S"
     image = "ubuntu_focal"
 }

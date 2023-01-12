@@ -9,12 +9,7 @@ variable "prefix" {
     }
 }
 
-variable "master" {
-    description = "Informations relatives aux instances masters à créer"
-    default = {}
-}
-
-variable "worker" {
+variable "configuration" {
     description = "Informations relatives aux instances workers à créer"
     default = {}
 }
