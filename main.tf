@@ -22,5 +22,5 @@ resource "scaleway_instance_server" "server" {
   name = "${var.prefix}-${count.index}"
   type = count.index <= var.no_of_master ? var.instance_master_type : var.instance_worker_type
   image = var.instance_type
-  ip_id = public_ip[count.index].ip_id
+  ip_id = public_ip.ip_id
 }
