@@ -28,10 +28,10 @@ variable "instance_master_type" {
     default = "DEV1-XL"
 }
 
-variable "instance_worker_type" {
+variable "instance_worker_image" {
     default = "ubuntu_focal"
 }
 
-variable "instance_master_type" {
+variable "instance_master_image" {
     default = "ubuntu_focal"
 }

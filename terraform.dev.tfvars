@@ -8,6 +8,6 @@ instance_worker_type = "DEV1-S"
 
 instance_master_type = "DEV1-XL"
 
-instance_worker_type = "ubuntu_focal"
+instance_worker_image = "ubuntu_focal"
 
-instance_master_type = "ubuntu_focal"
+instance_master_image = "ubuntu_focal"
