@@ -94,9 +94,10 @@ resource "scaleway_instance_server" "server" {
   }
 
   connection {
-    type     = "ssh"
-    user     = "root"
-    host     = self.public_ip
+    type        = "ssh"
+    user        = "root"
+    host        = self.public_ip
+    private_key = file("${path.module}/../.ssh/id_ed25519")
   }
 
   provisioner "remote-exec" {
