@@ -79,6 +79,8 @@ resource "scaleway_instance_server" "server" {
   type  = count.index < var.instance_master_count ? var.instance_master_type : var.instance_worker_type
   image = count.index < var.instance_master_count ? var.instance_master_image : var.instance_worker_image
   ip_id = scaleway_instance_ip.public_ip[count.index].id
+  
+  additional_volume_ids = [scaleway_instance_volume.server_volume[count.index].id]
 
   security_group_id = count.index < var.instance_master_count ? scaleway_instance_security_group.master_sg.id : scaleway_instance_security_group.worker_sg.id
 
@@ -86,5 +88,11 @@ resource "scaleway_instance_server" "server" {
     pn_id = scaleway_vpc_private_network.private_network.id
   }
 
-  additional_volume_ids = [scaleway_instance_volume.server_volume[count.index].id]
+  provisioner "remote-exec" {
+    inline = [
+      "curl -fsSL https://get.docker.com -o get-docker.sh",
+      "sh get-docker.sh",
+      "rm get-docker.sh"
+    ]
+ }
 }
