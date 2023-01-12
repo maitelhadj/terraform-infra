@@ -29,9 +29,13 @@ variable "instance_master_type" {
 }
 
 variable "instance_worker_image" {
+    description = "Image des instance worker à créer"
+    type = string
     default = "ubuntu_focal"
 }
 
 variable "instance_master_image" {
+    description = "Image des instances master à créer"
+    type = string
     default = "ubuntu_focal"
 }
