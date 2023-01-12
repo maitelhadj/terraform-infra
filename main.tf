@@ -16,11 +16,26 @@ resource "scaleway_instance_ip" "public_ip" {
   count = var.instance_count
 }
 
+resource "scaleway_instance_security_group" "ssh" {
+  inbound_default_policy = "drop" # By default we drop incoming traffic that do not match any inbound_rule
+
+  inbound_rule {
+    action = "accept"
+    port   = 22
+  }
+}
+
 resource "scaleway_instance_server" "server" {
   count = var.instance_count
 
-  name = "${var.prefix}-${count.index}"
-  type = count.index < var.no_of_master ? var.instance_master_type : var.instance_worker_type
+  name  = "${var.prefix}-${count.index}"
+  type  = count.index < var.instance_master_count ? var.instance_master_type : var.instance_worker_type
   image = var.instance_type
   ip_id = scaleway_instance_ip.public_ip[count.index].id
+
+  security_group_id = scaleway_instance_security_group.ssh.id
+
+  private_network {
+    pn_id = scaleway_vpc_private_network.private_network.id
+  }
 }
