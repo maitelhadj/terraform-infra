@@ -93,17 +93,17 @@ resource "scaleway_instance_server" "server" {
     pn_id = scaleway_vpc_private_network.private_network.id
   }
 
-#   connection {
-#     type     = "ssh"
-#     user     = "root"
-#     host     = self.public_ip
-#   }
+  connection {
+    type     = "ssh"
+    user     = "root"
+    host     = self.public_ip
+  }
 
-#   provisioner "remote-exec" {
-#     inline = [
-#       "curl -fsSL https://get.docker.com -o get-docker.sh",
-#       "sh get-docker.sh",
-#       "rm get-docker.sh"
-#     ]
-#  }
+  provisioner "remote-exec" {
+    inline = [
+      "curl -fsSL https://get.docker.com -o get-docker.sh",
+      "sh get-docker.sh",
+      "rm get-docker.sh"
+    ]
+ }
 }
