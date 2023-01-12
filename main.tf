@@ -17,6 +17,8 @@ resource "scaleway_instance_ip" "public_ip" {
 }
 
 resource "scaleway_instance_security_group" "worker_sg" {
+  name = "${var.prefix}-worker-security-group"
+
   inbound_default_policy  = "drop" # By default we drop incoming traffic that do not match any inbound_rule
   outbound_default_policy = "drop"
 
@@ -32,6 +34,8 @@ resource "scaleway_instance_security_group" "worker_sg" {
 }
 
 resource "scaleway_instance_security_group" "master_sg" {
+  name = "${var.prefix}-master-security-group"
+
   inbound_default_policy  = "drop" # By default we drop incoming traffic that do not match any inbound_rule
   outbound_default_policy = "drop"
 
