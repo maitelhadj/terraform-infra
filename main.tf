@@ -16,18 +16,54 @@ resource "scaleway_instance_ip" "public_ip" {
   count = var.instance_count
 }
 
-resource "scaleway_instance_security_group" "ssh" {
-  inbound_default_policy = "drop" # By default we drop incoming traffic that do not match any inbound_rule
+resource "scaleway_instance_security_group" "worker_sg" {
+  inbound_default_policy  = "drop" # By default we drop incoming traffic that do not match any inbound_rule
+  outbound_default_policy = "drop"
 
   inbound_rule {
     action = "accept"
     port   = 22
   }
+
+  outbound_rule {
+    action = "accept"
+    port   = 22
+  }
+}
+
+resource "scaleway_instance_security_group" "master_sg" {
+  inbound_default_policy  = "drop" # By default we drop incoming traffic that do not match any inbound_rule
+  outbound_default_policy = "drop"
+
+  inbound_rule {
+    action = "accept"
+    port   = 22
+  }
+
+  outbound_rule {
+    action = "accept"
+    port   = 22
+  }
+
+  outbound_rule {
+    action = "accept"
+    port   = 5601
+  }
+
+  outbound_rule {
+    action = "accept"
+    port   = 3000
+  }
+  
+  outbound_rule {
+    action = "accept"
+    port   = 9090
+  }
 }
 
 resource "scaleway_instance_volume" "server_volume" {
   count      = var.instance_count
-  type       = "l_ssd"
+  type       = "b_ssd"
   name       = "${var.prefix}-volume-${count.index}"
   size_in_gb = 30
 }
@@ -40,7 +76,7 @@ resource "scaleway_instance_server" "server" {
   image = count.index < var.instance_master_count ? var.instance_master_image : var.instance_worker_image
   ip_id = scaleway_instance_ip.public_ip[count.index].id
 
-  security_group_id = scaleway_instance_security_group.ssh.id
+  security_group_id = count.index < var.instance_master_count ? scaleway_instance_security_group.master_sg.id : scaleway_instance_security_group.worker_sg.id
 
   private_network {
     pn_id = scaleway_vpc_private_network.private_network.id
