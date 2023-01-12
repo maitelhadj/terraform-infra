@@ -17,10 +17,10 @@ resource "scaleway_instance_ip" "public_ip" {
 }
 
 resource "scaleway_instance_server" "server" {
-  for_each = scaleway_instance_ip.public_ip
+  count = var.instance_count
 
-  name = "${var.configuration.name}-${index(scaleway_instance_ip.public_ip, each.value) + 1}"
-  type = var.configuration.type
-  image = "${index(scaleway_instance_ip.public_ip, each.value) + 1}" <= var.configuration.no_of_master ? var.configuration.type_of_master : var.configuration.type_of_worker
-  ip_id = each.value.ip_id
+  name = "${var.prefix}-${count.index}"
+  type = count.index <= var.no_of_master ? var.instance_master_type : var.instance_worker_type
+  image = var.instance_type
+  ip_id = public_ip[count.index].ip_id
 }
