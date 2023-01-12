@@ -46,5 +46,5 @@ resource "scaleway_instance_server" "server" {
     pn_id = scaleway_vpc_private_network.private_network.id
   }
 
-  additional_volume_ids = scaleway_instance_volume.server_volume[count.index].id
+  additional_volume_ids = [scaleway_instance_volume.server_volume[count.index].id]
 }
