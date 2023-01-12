@@ -17,9 +17,9 @@ resource "scaleway_instance_ip" "public_ip" {
 }
 
 resource "scaleway_instance_server" "server" {
-  for_each = toset(scaleway_instance_ip.public_ip)
+  for_each = scaleway_instance_ip.public_ip
 
-  name = "${var.configuration.name}-${index(toset(scaleway_instance_ip.public_ip), each.value) + 1}"
+  name = "${var.configuration.name}-${index(scaleway_instance_ip.public_ip, each.value) + 1}"
   type = var.configuration.type
   image = "${index(scaleway_instance_ip.public_ip, each.value) + 1}" <= var.configuration.no_of_master ? var.configuration.type_of_master : var.configuration.type_of_worker
   ip_id = each.value.ip_id
