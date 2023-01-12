@@ -30,7 +30,7 @@ resource "scaleway_instance_server" "server" {
 
   name  = "${var.prefix}-${count.index}"
   type  = count.index < var.instance_master_count ? var.instance_master_type : var.instance_worker_type
-  image = var.instance_type
+  image = count.index < var.instance_master_count ? var.instance_master_image : var.instance_worker_image
   ip_id = scaleway_instance_ip.public_ip[count.index].id
 
   security_group_id = scaleway_instance_security_group.ssh.id
