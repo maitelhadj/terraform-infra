@@ -25,6 +25,13 @@ resource "scaleway_instance_security_group" "ssh" {
   }
 }
 
+resource "scaleway_instance_volume" "server_volume" {
+  count      = var.instance_count
+  type       = "l_ssd"
+  name       = "${var.prefix}-volume-${count.index}"
+  size_in_gb = 30
+}
+
 resource "scaleway_instance_server" "server" {
   count = var.instance_count
 
@@ -38,4 +45,6 @@ resource "scaleway_instance_server" "server" {
   private_network {
     pn_id = scaleway_vpc_private_network.private_network.id
   }
+
+  additional_volume_ids = scaleway_instance_volume.server_volume[count.index].id
 }
