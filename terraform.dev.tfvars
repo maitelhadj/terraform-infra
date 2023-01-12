@@ -1,6 +1,6 @@
 prefix = "mayas"
 
-instance_count = "3"
+instance_count = "4"
 
 no_of_master = "1"
 
