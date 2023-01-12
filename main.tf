@@ -20,14 +20,8 @@ resource "scaleway_instance_security_group" "worker_sg" {
   name = "${var.prefix}-worker-security-group"
 
   inbound_default_policy  = "drop" # By default we drop incoming traffic that do not match any inbound_rule
-  outbound_default_policy = "drop"
 
   inbound_rule {
-    action = "accept"
-    port   = 22
-  }
-
-  outbound_rule {
     action = "accept"
     port   = 22
   }
@@ -37,29 +31,23 @@ resource "scaleway_instance_security_group" "master_sg" {
   name = "${var.prefix}-master-security-group"
 
   inbound_default_policy  = "drop" # By default we drop incoming traffic that do not match any inbound_rule
-  outbound_default_policy = "drop"
 
   inbound_rule {
     action = "accept"
     port   = 22
   }
 
-  outbound_rule {
-    action = "accept"
-    port   = 22
-  }
-
-  outbound_rule {
+  inbound_rule {
     action = "accept"
     port   = 5601
   }
 
-  outbound_rule {
+  inbound_rule {
     action = "accept"
     port   = 3000
   }
   
-  outbound_rule {
+  inbound_rule {
     action = "accept"
     port   = 9090
   }
@@ -84,7 +72,7 @@ resource "scaleway_instance_server" "server" {
   type  = count.index < var.instance_master_count ? var.instance_master_type : var.instance_worker_type
   image = count.index < var.instance_master_count ? var.instance_master_image : var.instance_worker_image
   ip_id = scaleway_instance_ip.public_ip[count.index].id
-  
+
   additional_volume_ids = [scaleway_instance_volume.server_volume[count.index].id]
 
   security_group_id = count.index < var.instance_master_count ? scaleway_instance_security_group.master_sg.id : scaleway_instance_security_group.worker_sg.id
@@ -97,7 +85,7 @@ resource "scaleway_instance_server" "server" {
     type        = "ssh"
     user        = "root"
     host        = self.public_ip
-    private_key = file("${path.module}/../.ssh/id_ed25519")
+    private_key = file("/home/mayas/.ssh/id_ed25519")
   }
 
   provisioner "remote-exec" {
