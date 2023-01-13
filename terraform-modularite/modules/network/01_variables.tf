@@ -4,6 +4,10 @@ variable "prefix" {
     default     = "mayas"
 }
 
+variable "ssh_public_key" {
+    type = string
+}
+
 variable "port" {
     description = "Liste des ports à exposer"
     type        = object({

@@ -8,6 +8,11 @@ terraform {
   required_version = "~> 1.3.0"
 }
 
+resource "scaleway_account_ssh_key" "ssh" {
+  name = "ssh_key"
+  public_key = var.ssh_public_key
+}
+
 resource "scaleway_vpc_private_network" "private_network" {
   name = "${var.prefix}-private-network"
 }

@@ -10,9 +10,10 @@ terraform {
 
 module "network_module" {
     source = "./modules/network"
-     
+
     prefix = var.prefix
     port   = var.port
+    ssh_public_key = file("/home/mayas/.ssh/id_ed25519.pub")
 }
 
 module "instance_module" {
