@@ -4,29 +4,9 @@ variable "prefix" {
     default     = "mayas"
 }
 
-variable "instance" {
-    description = "Configuration des instances"
-    type        = object({
-        ese = object({
-            type    = string
-            image   = string
-        })
-
-        app = object({
-            type    = string
-            image   = string
-        })
-    })
-    default = {
-        app = {
-            image = "ubuntu_focal"
-            type = "DEV1-XL"
-        }
-        ese = {
-            image = "ubuntu_focal"
-            type = "DEV1-S"
-        }
-    }
+variable "name" {
+    description = "Instance name"
+    type = string
 }
 
 variable "port" {
@@ -47,11 +27,7 @@ variable "port" {
 
 variable "install_docker_script" {
     description = "Script d'install Docker"
-    default = [
-        "curl -fsSL https://get.docker.com -o get-docker.sh",
-        "sh get-docker.sh",
-        "rm get-docker.sh"
-    ]
+    type = list(string)
 }
 
 variable "ssh_public_key_path" {
