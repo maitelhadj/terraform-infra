@@ -8,6 +8,10 @@ terraform {
   required_version = "~> 1.3.0"
 }
 
+module "network_module" {
+    source = "./modules/network"
+}
+
 resource "scaleway_instance_volume" "volume_ese1" {
   name       = "${var.prefix}-volume-ese-1"
   type       = "b_ssd"
@@ -38,7 +42,7 @@ resource "scaleway_instance_server" "server_ese1" {
   type  = var.instance.ese.type
   image = var.instance.ese.image
   
-  ip_id = scaleway_instance_ip.public_ip_ese1.id
+  ip_id = network_module.scaleway_instance_ip.public_ip_ese1.id
 
   additional_volume_ids = [scaleway_instance_volume.volume_ese1.id]
 
@@ -55,7 +59,7 @@ resource "scaleway_instance_server" "server_ese2" {
   type  = var.instance.ese.type
   image = var.instance.ese.image
   
-  ip_id = scaleway_instance_ip.public_ip_ese2.id
+  ip_id = network_module.scaleway_instance_ip.public_ip_ese2.id
 
   additional_volume_ids = [scaleway_instance_volume.volume_ese2.id]
 
@@ -72,7 +76,7 @@ resource "scaleway_instance_server" "server_ese3" {
   type  = var.instance.ese.type
   image = var.instance.ese.image
   
-  ip_id = scaleway_instance_ip.public_ip_ese3.id
+  ip_id = network_module.scaleway_instance_ip.public_ip_ese3.id
 
   additional_volume_ids = [scaleway_instance_volume.volume_ese3.id]
 
@@ -89,7 +93,7 @@ resource "scaleway_instance_server" "server_app" {
   type  = var.instance.ese.type
   image = var.instance.ese.image
   
-  ip_id = scaleway_instance_ip.public_ip_app.id
+  ip_id = network_module.scaleway_instance_ip.public_ip_app.id
 
   additional_volume_ids = [scaleway_instance_volume.volume_app.id]
 
