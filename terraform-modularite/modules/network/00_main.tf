@@ -17,7 +17,7 @@ resource "scaleway_instance_ip" "public_ip_ese1" {}
 resource "scaleway_instance_ip" "public_ip_ese2" {}
 resource "scaleway_instance_ip" "public_ip_ese3" {}
 
-resource "scaleway_instance_security_group" "worker_sg" {
+resource "scaleway_instance_security_group" "ese_sg" {
   name = "${var.prefix}-ese-security-group"
   inbound_default_policy  = "drop"
 
@@ -27,7 +27,7 @@ resource "scaleway_instance_security_group" "worker_sg" {
   }
 }
 
-resource "scaleway_instance_security_group" "master_sg" {
+resource "scaleway_instance_security_group" "app_sg" {
   name = "${var.prefix}-app-security-group"
   inbound_default_policy  = "drop"
 
