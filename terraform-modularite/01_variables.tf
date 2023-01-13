@@ -34,3 +34,12 @@ variable "ssh_private_key_path" {
     description = "SSH Private key path"
     type = string
 }
+
+variable "instances" {
+    description = "Map of instance to create"
+    type = map(object({
+        name  = string
+        type  = string
+        image = string
+    }))
+}

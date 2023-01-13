@@ -15,3 +15,26 @@ install_docker_script = [
 
 ssh_public_key_path = "/home/mayas/.ssh/id_ed25519.pub"
 ssh_private_key_path = "/home/mayas/.ssh/id_ed25519"
+
+instances = {
+    app = {
+        name  = "app"
+        type  = "DEV1-XL"
+        image = "ubuntu_focal"
+    },
+    ese1 = {
+        name  = "ese-1"
+        type  = "DEV1-S"
+        image = "ubuntu_focal"
+    },
+    ese2 = {
+        name  = "ese-2"
+        type  = "DEV1-S"
+        image = "ubuntu_focal"
+    },
+    ese3 = {
+        name  = "ese-3"
+        type  = "DEV1-S"
+        image = "ubuntu_focal"
+    }
+}

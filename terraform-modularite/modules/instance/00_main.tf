@@ -17,7 +17,7 @@ resource "scaleway_instance_volume" "volume" {
 }
 
 resource "scaleway_instance_server" "server" {
-  name  = var.name
+  name  = "${var.prefix}-${var.name}"
   
   type  = var.type
   image = var.image

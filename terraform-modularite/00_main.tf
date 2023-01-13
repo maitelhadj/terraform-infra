@@ -18,30 +18,30 @@ module "network_module" {
 }
 
 module "instance_module" {
-  count = 4
+  for_each = var.instances
 
   source   = "./modules/instance"
 
   prefix   = var.prefix
-  name     = "server-ese1"
-  type     = count.index < 1 ? "DEV1-XL" : "DEV1-S"
-  image    = "ubuntu_focal"
+  name     = each.value.name
+  type     = each.value.type
+  image    = each.value.image
   
   private_network_id = module.network_module.private_netwotk_id
-  sg = count.index < 1 ? module.network_module.app_sg_id : module.network_module.app_sg_id
+  sg = each.key == "app" ? module.network_module.app_sg_id : module.network_module.app_sg_id
 
   depends_on = [module.network_module]
 }
 
 module "provision_module" {
-  count = 4
+  for_each = module.instance_module
 
   source = "./modules/provision"
 
   ssh_private_key = file(var.ssh_private_key_path)
 
-  server_id = module.instance_module[count.index].server_id
-  public_ip = module.instance_module[count.index].public_ip
+  server_id = each.value.server_id
+  public_ip = each.value.public_ip
 
   install_docker_script = var.install_docker_script
 }
