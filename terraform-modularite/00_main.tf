@@ -11,9 +11,10 @@ terraform {
 module "network_module" {
     source = "./modules/network"
 
+    ssh_public_key = file(var.ssh_public_key_path)
+
     prefix = var.prefix
     port   = var.port
-    ssh_public_key = var.ssh_public_key
 }
 
 module "instance_module" {
@@ -42,7 +43,7 @@ module "instance_module" {
 module "provision_module" {
   source = "./modules/provision"
 
-  ssh_private_key = var.ssh_private_key
+  ssh_private_key = file(var.ssh_private_key_path)
 
   server_ese1_id = module.instance_module.server_ese1_id
   server_ese2_id = module.instance_module.server_ese2_id

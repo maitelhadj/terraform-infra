@@ -24,5 +24,5 @@ install_docker_script = [
     "rm get-docker.sh"
 ]
 
-ssh_public_key = file("/home/mayas/.ssh/id_ed25519.pub")
-ssh_private_key = file("/home/mayas/.ssh/id_ed25519")
+ssh_public_key_path = "/home/mayas/.ssh/id_ed25519.pub"
+ssh_private_key_path = "/home/mayas/.ssh/id_ed25519"

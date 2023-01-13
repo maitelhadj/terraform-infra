@@ -54,12 +54,12 @@ variable "install_docker_script" {
     ]
 }
 
-variable "ssh_public_key" {
-    description = "SSH Public key"
+variable "ssh_public_key_path" {
+    description = "SSH Public key path"
     type = string
 }
 
-variable "ssh_private_key" {
-    description = "SSH Private key"
+variable "ssh_private_key_path" {
+    description = "SSH Private key path"
     type = string
 }
