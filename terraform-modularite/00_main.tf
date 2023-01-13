@@ -49,10 +49,10 @@ module "provision_module" {
   server_ese3_id = module.instance_module.server_ese3_id
   server_app_id = module.instance_module.server_app_id
 
-  host_ese1 = module.instance_module.host_ese1
-  host_ese2 = module.instance_module.host_ese2
-  host_ese3 = module.instance_module.host_ese3
-  host_app = module.instance_module.host_app
+  public_ip_ese1 = module.instance_module.public_ip_ese1
+  public_ip_ese2 = module.instance_module.public_ip_ese2
+  public_ip_ese3 = module.instance_module.public_ip_ese3
+  public_ip_app = module.instance_module.public_ip_app
 
   install_docker_script = var.install_docker_script
 }
