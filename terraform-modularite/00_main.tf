@@ -8,9 +8,7 @@ terraform {
   required_version = "~> 1.3.0"
 }
 
-module "network_module" {
-  count = 4
-  
+module "network_module" {  
   source = "./modules/network"
   
   ssh_public_key = file(var.ssh_public_key_path)
