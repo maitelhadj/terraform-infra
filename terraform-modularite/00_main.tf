@@ -9,15 +9,19 @@ terraform {
 }
 
 module "network_module" {
-    source = "./modules/network"
-
-    ssh_public_key = file(var.ssh_public_key_path)
-
-    prefix = var.prefix
-    port   = var.port
+  count = 4
+  
+  source = "./modules/network"
+  
+  ssh_public_key = file(var.ssh_public_key_path)
+  
+  prefix = var.prefix
+  port   = var.port
 }
 
 module "instance_module" {
+  count = 4
+
   source   = "./modules/instance"
 
   prefix   = var.prefix
@@ -27,12 +31,14 @@ module "instance_module" {
   
   private_network_id = module.network_module.private_netwotk_id
   ip_id = module.network_module.public_ip_id
-  sg = module.network_module.ese_sg_id
+  sg = count.index < 1 ? module.network_module.app_sg_id : module.network_module.app_sg_id
 
   depends_on = [module.network_module]
 }
 
 module "provision_module" {
+  count = 4
+
   source = "./modules/provision"
 
   ssh_private_key = file(var.ssh_private_key_path)
