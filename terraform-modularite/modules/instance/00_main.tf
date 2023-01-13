@@ -22,7 +22,7 @@ resource "scaleway_instance_server" "server" {
   type  = var.type
   image = var.image
   
-  ip_id = scaleway_instance_ip.public_ip.ip_id
+  ip_id = scaleway_instance_ip.public_ip.id
 
   additional_volume_ids = [scaleway_instance_volume.volume.id]
 
