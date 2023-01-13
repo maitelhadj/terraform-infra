@@ -14,18 +14,18 @@ output "server_app_id" {
     value = scaleway_instance_server.server_app.id
 }
 
-output "host_ese1" {
+output "public_ip_ese1" {
     value = scaleway_instance_server.server_ese1.public_ip
 }
 
-output "host_ese2" {
+output "public_ip_ese2" {
     value = scaleway_instance_server.server_ese2.public_ip
 }
 
-output "host_ese3" {
+output "public_ip_ese3" {
     value = scaleway_instance_server.server_ese3.public_ip
 }
 
-output "host_app" {
+output "public_ip_app" {
     value = scaleway_instance_server.server_app.public_ip
 }
