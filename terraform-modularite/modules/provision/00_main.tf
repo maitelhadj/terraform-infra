@@ -19,7 +19,7 @@ resource "null_resource" "ese1" {
   }
 
   provisioner "remote-exec" {
-    inline = var.install_docker
+    inline = var.install_docker_script
   }
 }
 
@@ -34,7 +34,7 @@ resource "null_resource" "ese2" {
   }
 
   provisioner "remote-exec" {
-    inline = var.install_docker
+    inline = var.install_docker_script
   }
 }
 
@@ -49,7 +49,7 @@ resource "null_resource" "ese3" {
   }
 
   provisioner "remote-exec" {
-    inline = var.install_docker
+    inline = var.install_docker_script
   }
 }
 
@@ -64,6 +64,6 @@ resource "null_resource" "app" {
   }
 
   provisioner "remote-exec" {
-    inline = var.install_docker
+    inline = var.install_docker_script
   }
 }
