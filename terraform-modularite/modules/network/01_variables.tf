@@ -1,12 +1,21 @@
 variable "prefix" {
-    description = "Prefix"
+    description = "Prefix des ressources"
     type        = string
+    default     = "mayas"
 }
 
-variable "instances" {
-    description = "Instances à créer"
-    type        = list(object({
-        type = string
-        image = string
-    }))
+variable "port" {
+    description = "Liste des ports à exposer"
+    type        = object({
+        ssh         = number
+        kibana      = number
+        grafana     = number
+        prometheus  = number
+    })
+    default = {
+        grafana = 3000
+        kibana = 5601
+        prometheus = 9090
+        ssh = 22
+    }
 }
