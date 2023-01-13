@@ -9,7 +9,7 @@ terraform {
 }
 
 module "network_module" {
-    source = "./modules/network"
+    source = "../network"
 }
 
 resource "scaleway_instance_volume" "volume_ese1" {
