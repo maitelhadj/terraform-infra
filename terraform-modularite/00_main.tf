@@ -1,13 +1,3 @@
-terraform {
-  required_providers {
-    scaleway = {
-      source = "scaleway/scaleway"
-      version = "~> 2.9.1"
-    }
-  }
-  required_version = "~> 1.3.0"
-}
-
 # Un module n'est qu'un bout de recette, par exemple je peux créer un module dans lequel je vais déployer plusieurs ressources
 # tel que : une public_ip, une instance...
 #
