@@ -1,3 +1,7 @@
+variable "ssh_private_key" {
+    type = string
+}
+
 variable "server_ese1_id" {
     type = string
 }
@@ -14,22 +18,22 @@ variable "server_app_id" {
     type = string
 }
 
-variable "host_ese1" {
+variable "public_ip_ese1" {
     type = string
 }
 
-variable "host_ese2" {
+variable "public_ip_ese2" {
     type = string
 }
 
-variable "host_ese3" {
+variable "public_ip_ese3" {
     type = string
 }
 
-variable "host_app" {
+variable "public_ip_app" {
     type = string
 }
 
-variable "install_docker" {
+variable "install_docker_script" {
     type = list(string)
 }

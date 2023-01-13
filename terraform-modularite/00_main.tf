@@ -13,7 +13,7 @@ module "network_module" {
 
     prefix = var.prefix
     port   = var.port
-    ssh_public_key = file("/home/mayas/.ssh/id_ed25519.pub")
+    ssh_public_key = var.ssh_public_key
 }
 
 module "instance_module" {
@@ -42,11 +42,7 @@ module "instance_module" {
 module "provision_module" {
   source = "./modules/provision"
 
-  install_docker = [ 
-    "curl -fsSL https://get.docker.com -o get-docker.sh",
-    "sh get-docker.sh",
-    "rm get-docker.sh"
-  ]
+  ssh_private_key = var.ssh_private_key
 
   server_ese1_id = module.instance_module.server_ese1_id
   server_ese2_id = module.instance_module.server_ese2_id
@@ -57,4 +53,6 @@ module "provision_module" {
   host_ese2 = module.instance_module.host_ese2
   host_ese3 = module.instance_module.host_ese3
   host_app = module.instance_module.host_app
+
+  install_docker_script = var.install_docker_script
 }

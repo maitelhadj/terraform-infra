@@ -14,8 +14,8 @@ resource "null_resource" "ese1" {
   }
 
   connection {
-    host = var.host_ese1
-    private_key = file("/home/mayas/.ssh/id_ed25519")
+    host = var.public_ip_ese1
+    private_key = var.ssh_private_key
   }
 
   provisioner "remote-exec" {
@@ -29,8 +29,8 @@ resource "null_resource" "ese2" {
   }
 
   connection {
-    host = var.host_ese2
-    private_key = file("/home/mayas/.ssh/id_ed25519")
+    host = var.public_ip_ese2
+    private_key = var.ssh_private_key
   }
 
   provisioner "remote-exec" {
@@ -44,8 +44,8 @@ resource "null_resource" "ese3" {
   }
 
   connection {
-    host = var.host_ese3
-    private_key = file("/home/mayas/.ssh/id_ed25519")
+    host = var.public_ip_ese3
+    private_key = var.ssh_private_key
   }
 
   provisioner "remote-exec" {
@@ -59,8 +59,8 @@ resource "null_resource" "app" {
   }
 
   connection {
-    host = var.host_app
-    private_key = file("/home/mayas/.ssh/id_ed25519")
+    host = var.public_ip_app
+    private_key = var.ssh_private_key
   }
 
   provisioner "remote-exec" {

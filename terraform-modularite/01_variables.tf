@@ -44,3 +44,22 @@ variable "port" {
         ssh = 22
     }
 }
+
+variable "install_docker_script" {
+    description = "Script d'install Docker"
+    default = [
+        "curl -fsSL https://get.docker.com -o get-docker.sh",
+        "sh get-docker.sh",
+        "rm get-docker.sh"
+    ]
+}
+
+variable "ssh_public_key" {
+    description = "SSH Public key"
+    type = string
+}
+
+variable "ssh_private_key" {
+    description = "SSH Private key"
+    type = string
+}
