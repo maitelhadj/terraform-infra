@@ -28,3 +28,13 @@ variable "instance" {
         }
     }
 }
+
+variable "ip_id" {
+    description = "Ceci est un test"
+    type = object({
+        ese1 = string
+        ese2 = string
+        ese3 = string
+        app  = string
+    })
+}
