@@ -20,11 +20,18 @@ module "instance_module" {
 
     prefix   = var.prefix
     instance = var.instance
+    
     ip_id = {
       ese1 = module.network_module.public_ip_ese1_id
       ese2 = module.network_module.public_ip_ese2_id
       ese3 = module.network_module.public_ip_ese3_id
       app  = module.network_module.public_ip_app_id
     }
+    
+    sg = {
+      ese = module.network_module.ese_sg_id
+      app = module.network_module.app_sg_id
+    }
+
     depends_on = [module.network_module]
 }

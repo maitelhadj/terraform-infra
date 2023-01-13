@@ -30,11 +30,19 @@ variable "instance" {
 }
 
 variable "ip_id" {
-    description = "Ceci est un test"
+    description = "Ip ids"
     type = object({
         ese1 = string
         ese2 = string
         ese3 = string
         app  = string
+    })
+}
+
+variable "sg" {
+    description = "Security group ids"
+    type = object({
+        ese = string
+        app = string
     })
 }
