@@ -17,8 +17,6 @@ resource "scaleway_vpc_private_network" "private_network" {
   name = "${var.prefix}-private-network"
 }
 
-resource "scaleway_instance_ip" "public_ip" {}
-
 resource "scaleway_instance_security_group" "ese_sg" {
   name = "${var.prefix}-ese-security-group"
   inbound_default_policy  = "drop"

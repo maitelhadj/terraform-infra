@@ -2,10 +2,6 @@ output "private_netwotk_id" {
     value = scaleway_vpc_private_network.private_network.id
 }
 
-output "public_ip_id" {
-    value = scaleway_instance_ip.public_ip.id
-}
-
 output "ese_sg_id" {
     value = scaleway_instance_security_group.ese_sg.id
 }

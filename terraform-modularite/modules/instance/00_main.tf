@@ -8,6 +8,8 @@ terraform {
   required_version = "~> 1.3.0"
 }
 
+resource "scaleway_instance_ip" "public_ip" {}
+
 resource "scaleway_instance_volume" "volume" {
   name       = "${var.prefix}-volume"
   type       = "b_ssd"
@@ -20,7 +22,7 @@ resource "scaleway_instance_server" "server" {
   type  = var.type
   image = var.image
   
-  ip_id = var.ip_id
+  ip_id = scaleway_instance_ip.public_ip.ip_id
 
   additional_volume_ids = [scaleway_instance_volume.volume.id]
 

@@ -19,11 +19,6 @@ variable "image" {
     type = string
 }
 
-variable "ip_id" {
-    description = "Public IP"
-    type = string
-}
-
 variable "sg" {
     description = "Security group"
     type = string

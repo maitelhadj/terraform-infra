@@ -26,12 +26,11 @@ module "instance_module" {
 
   prefix   = var.prefix
   name     = "server-ese1"
-  type     = "DEV1-S"
+  type     = count.index < 1 ? "DEV1-XL" : "DEV1-S"
   image    = "ubuntu_focal"
   
-  private_network_id = module.network_module[count.index].private_netwotk_id
-  ip_id = module.network_module[count.index].public_ip_id
-  sg = count.index < 1 ? module.network_module[count.index].app_sg_id : module.network_module[count.index].app_sg_id
+  private_network_id = module.network_module.private_netwotk_id
+  sg = count.index < 1 ? module.network_module.app_sg_id : module.network_module.app_sg_id
 
   depends_on = [module.network_module]
 }
