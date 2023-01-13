@@ -43,10 +43,10 @@ resource "scaleway_instance_server" "server_ese1" {
   additional_volume_ids = [scaleway_instance_volume.volume_ese1.id]
 
   private_network {
-    pn_id = scaleway_vpc_private_network.private_network.id
+    pn_id = var.private_network_id
   }
 
-  security_group_id = scaleway_instance_security_group.ese_sg.id
+  security_group_id = var.sg.ese
 }
 
 resource "scaleway_instance_server" "server_ese2" {
@@ -60,10 +60,10 @@ resource "scaleway_instance_server" "server_ese2" {
   additional_volume_ids = [scaleway_instance_volume.volume_ese2.id]
 
   private_network {
-    pn_id = scaleway_vpc_private_network.private_network.id
+    pn_id = var.private_network_id
   }
 
-  security_group_id = scaleway_instance_security_group.ese_sg.id
+  security_group_id = var.sg.ese
 }
 
 resource "scaleway_instance_server" "server_ese3" {
@@ -77,10 +77,10 @@ resource "scaleway_instance_server" "server_ese3" {
   additional_volume_ids = [scaleway_instance_volume.volume_ese3.id]
 
   private_network {
-    pn_id = scaleway_vpc_private_network.private_network.id
+    pn_id = var.private_network_id
   }
 
-  security_group_id = scaleway_instance_security_group.ese_sg.id
+  security_group_id = var.sg.ese
 }
 
 resource "scaleway_instance_server" "server_app" {
@@ -94,8 +94,8 @@ resource "scaleway_instance_server" "server_app" {
   additional_volume_ids = [scaleway_instance_volume.volume_app.id]
 
   private_network {
-    pn_id = scaleway_vpc_private_network.private_network.id
+    pn_id = var.private_network_id
   }
 
-  security_group_id = scaleway_instance_security_group.ese_sg.id
+  security_group_id = var.sg.app
 }

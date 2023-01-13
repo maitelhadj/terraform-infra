@@ -21,6 +21,8 @@ module "instance_module" {
     prefix   = var.prefix
     instance = var.instance
     
+    private_network_id = module.network_module.private_netwotk_id
+
     ip_id = {
       ese1 = module.network_module.public_ip_ese1_id
       ese2 = module.network_module.public_ip_ese2_id

@@ -29,6 +29,11 @@ variable "instance" {
     }
 }
 
+variable "private_network_id" {
+    description = "Private network id"
+    type = string
+}
+
 variable "ip_id" {
     description = "Ip ids"
     type = object({
