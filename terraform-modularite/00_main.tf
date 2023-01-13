@@ -29,9 +29,9 @@ module "instance_module" {
   type     = "DEV1-S"
   image    = "ubuntu_focal"
   
-  private_network_id = module.network_module.private_netwotk_id[count.index]
-  ip_id = module.network_module.public_ip_id[count.index]
-  sg = count.index < 1 ? module.network_module.app_sg_id[count.index] : module.network_module.app_sg_id[count.index]
+  private_network_id = module.network_module[count.index].private_netwotk_id
+  ip_id = module.network_module[count.index].public_ip_id
+  sg = count.index < 1 ? module.network_module[count.index].app_sg_id : module.network_module[count.index].app_sg_id
 
   depends_on = [module.network_module]
 }
@@ -43,8 +43,8 @@ module "provision_module" {
 
   ssh_private_key = file(var.ssh_private_key_path)
 
-  server_id = module.instance_module.server_id[count.index]
-  public_ip = module.instance_module.public_ip[count.index]
+  server_id = module.instance_module[count.index].server_id
+  public_ip = module.instance_module[count.index].public_ip
 
   install_docker_script = var.install_docker_script
 }
