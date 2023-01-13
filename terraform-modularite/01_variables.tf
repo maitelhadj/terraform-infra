@@ -4,11 +4,6 @@ variable "prefix" {
     default     = "mayas"
 }
 
-variable "name" {
-    description = "Instance name"
-    type = string
-}
-
 variable "port" {
     description = "Liste des ports à exposer"
     type        = object({
