@@ -22,6 +22,8 @@ module "instance_module" {
 
   prefix   = var.prefix
   name     = "server-ese1"
+  type     = "DEV1-S"
+  image    = "ubuntu_focal"
   
   private_network_id = module.network_module.private_netwotk_id
   ip_id = module.network_module.public_ip_id
