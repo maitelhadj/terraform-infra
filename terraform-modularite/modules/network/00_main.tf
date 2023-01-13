@@ -1,3 +1,13 @@
+terraform {
+  required_providers {
+    scaleway = {
+      source = "scaleway/scaleway"
+      version = "~> 2.9.1"
+    }
+  }
+  required_version = "~> 1.3.0"
+}
+
 resource "scaleway_account_ssh_key" "ssh" {
   name = "ssh_key"
   public_key = var.ssh_public_key
