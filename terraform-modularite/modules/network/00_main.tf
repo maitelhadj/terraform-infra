@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     scaleway = {
-      source = "scaleway/scaleway"
+      source  = "scaleway/scaleway"
       version = "~> 2.9.1"
     }
   }
@@ -9,7 +9,7 @@ terraform {
 }
 
 resource "scaleway_account_ssh_key" "ssh" {
-  name = "ssh_key"
+  name       = "ssh_key"
   public_key = var.ssh_public_key
 }
 
@@ -18,8 +18,8 @@ resource "scaleway_vpc_private_network" "private_network" {
 }
 
 resource "scaleway_instance_security_group" "ese_sg" {
-  name = "${var.prefix}-ese-security-group"
-  inbound_default_policy  = "drop"
+  name                   = "${var.prefix}-ese-security-group"
+  inbound_default_policy = "drop"
 
   inbound_rule {
     action = "accept"
@@ -28,8 +28,8 @@ resource "scaleway_instance_security_group" "ese_sg" {
 }
 
 resource "scaleway_instance_security_group" "app_sg" {
-  name = "${var.prefix}-app-security-group"
-  inbound_default_policy  = "drop"
+  name                   = "${var.prefix}-app-security-group"
+  inbound_default_policy = "drop"
 
   dynamic "inbound_rule" {
     for_each = var.port

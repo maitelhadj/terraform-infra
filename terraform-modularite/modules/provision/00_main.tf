@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     scaleway = {
-      source = "scaleway/scaleway"
+      source  = "scaleway/scaleway"
       version = "~> 2.9.1"
     }
   }
@@ -14,7 +14,7 @@ resource "null_resource" "provision" {
   }
 
   connection {
-    host = var.public_ip
+    host        = var.public_ip
     private_key = var.ssh_private_key
   }
 

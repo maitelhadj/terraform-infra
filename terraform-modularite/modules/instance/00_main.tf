@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     scaleway = {
-      source = "scaleway/scaleway"
+      source  = "scaleway/scaleway"
       version = "~> 2.9.1"
     }
   }
@@ -17,11 +17,11 @@ resource "scaleway_instance_volume" "volume" {
 }
 
 resource "scaleway_instance_server" "server" {
-  name  = "${var.prefix}-${var.name}"
-  
+  name = "${var.prefix}-${var.name}"
+
   type  = var.type
   image = var.image
-  
+
   ip_id = scaleway_instance_ip.public_ip.id
 
   additional_volume_ids = [scaleway_instance_volume.volume.id]

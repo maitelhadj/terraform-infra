@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     scaleway = {
-      source = "scaleway/scaleway"
+      source  = "scaleway/scaleway"
       version = "~> 2.9.1"
     }
   }
@@ -16,11 +16,11 @@ terraform {
 #   - les arguments "prefix" et "port" sont des variables qui sont déclarées dans le fichier "modules/network/01_variables.tf" et que je peux initialiser directement dans ce bloc module
 # 
 # Si je fais un terraform apply sur cette recette (le main dans lequel on se trouve), ce dernier va faire un appel au module network et appliquer la recette que tu auras défini dans ce module
-module "network_module" {  
+module "network_module" {
   source = "./modules/network"
-  
+
   ssh_public_key = file(var.ssh_public_key_path)
-  
+
   prefix = var.prefix
   port   = var.port
 }
@@ -38,15 +38,15 @@ module "network_module" {
 module "instance_module" {
   for_each = var.instances
 
-  source   = "./modules/instance"
+  source = "./modules/instance"
 
-  prefix   = var.prefix
-  name     = each.value.name
-  type     = each.value.type
-  image    = each.value.image
-  
+  prefix = var.prefix
+  name   = each.value.name
+  type   = each.value.type
+  image  = each.value.image
+
   private_network_id = module.network_module.private_netwotk_id
-  sg = each.key == "app" ? module.network_module.app_sg_id : module.network_module.app_sg_id
+  sg                 = each.key == "app" ? module.network_module.app_sg_id : module.network_module.app_sg_id
 
   depends_on = [module.network_module]
 }
