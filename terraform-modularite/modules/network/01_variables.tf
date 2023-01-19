@@ -10,7 +10,12 @@ variable "ssh_public_key" {
 
 variable "port" {
     description = "Liste des ports à exposer"
-    type        = map(number)
+    type        = object({
+        ssh         = number
+        kibana      = number
+        grafana     = number
+        prometheus  = number
+    })
     default = {
         grafana = 3000
         kibana = 5601

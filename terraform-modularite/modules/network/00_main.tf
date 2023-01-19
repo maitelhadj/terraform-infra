@@ -36,7 +36,7 @@ resource "scaleway_instance_security_group" "app_sg" {
 
     content {
       action = "accept"
-      port   = each.value
+      port   = inbound_rule.value
     }
   }
 }
