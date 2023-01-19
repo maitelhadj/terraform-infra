@@ -1,7 +1,6 @@
 variable "prefix" {
   description = "Prefix des ressources"
   type        = string
-  default     = "mayas"
 }
 
 variable "name" {
