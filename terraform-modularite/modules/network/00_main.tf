@@ -31,23 +31,12 @@ resource "scaleway_instance_security_group" "app_sg" {
   name = "${var.prefix}-app-security-group"
   inbound_default_policy  = "drop"
 
-  inbound_rule {
-    action = "accept"
-    port   = var.port.ssh
-  }
+  dynamic "inbound_rule" {
+    for_each = var.port
 
-  inbound_rule {
-    action = "accept"
-    port   = var.port.grafana
-  }
-
-  inbound_rule {
-    action = "accept"
-    port   = var.port.kibana
-  }
-  
-  inbound_rule {
-    action = "accept"
-    port   = var.port.prometheus
+    content {
+      action = "accept"
+      port   = each.value
+    }
   }
 }
