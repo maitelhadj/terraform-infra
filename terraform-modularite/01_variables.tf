@@ -1,7 +1,6 @@
 variable "prefix" {
     description = "Prefix des ressources"
     type        = string
-    default     = "mayas"
 }
 
 variable "port" {
@@ -12,12 +11,6 @@ variable "port" {
         grafana     = number
         prometheus  = number
     })
-    default = {
-        grafana = 3000
-        kibana = 5601
-        prometheus = 9090
-        ssh = 22
-    }
 }
 
 variable "install_docker_script" {
